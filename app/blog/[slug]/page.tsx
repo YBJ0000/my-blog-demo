@@ -1,14 +1,15 @@
 import { client, urlFor } from '../../../lib/sanity'
 import Image from 'next/image'
-import Link from 'next/link'  // 添加这行
+import Link from 'next/link'
 import { format } from 'date-fns'
 import { PortableText } from '@portabletext/react'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { TypedObject } from '@portabletext/types'
 
 interface Post {
   title: string;
   mainImage: SanityImageSource;
-  body: any;
+  body: TypedObject | TypedObject[];  // 替换 any
   publishedAt: string;
   author: { name: string };
 }
