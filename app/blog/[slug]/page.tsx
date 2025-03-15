@@ -18,9 +18,16 @@ interface PageProps {
   params: { slug: string };
 }
 
+export async function generateStaticParams() {
+  const posts = await client.fetch(`
+    *[_type == "post"] { "slug": slug.current }
+  `);
+  return posts.map((post: { slug: string }) => ({ slug: post.slug }));
+}
+
 async function BlogPost({ params }: PageProps) {
-  const post: Post = await getPost(params.slug)
-  
+  const post: Post = await getPost(params.slug);
+
   return (
     <article className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
       <div className="max-w-4xl mx-auto px-4">
@@ -56,7 +63,7 @@ async function BlogPost({ params }: PageProps) {
             )}
 
             <div className="prose prose-lg max-w-none">
-              <div className="text-gray-900">  {/* 添加这个包装 div */}
+              <div className="text-gray-900">  
                 <PortableText value={post.body} />
               </div>
             </div>
@@ -64,7 +71,7 @@ async function BlogPost({ params }: PageProps) {
         </div>
       </div>
     </article>
-  )
+  );
 }
 
 async function getPost(slug: string) {
@@ -77,8 +84,8 @@ async function getPost(slug: string) {
       author->,
       categories[]->
     }
-  `, { slug })
-  return post
+  `, { slug });
+  return post;
 }
 
-export default BlogPost
+export default BlogPost;
