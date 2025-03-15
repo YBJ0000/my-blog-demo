@@ -9,30 +9,22 @@ import { TypedObject } from '@portabletext/types'
 interface Post {
   title: string;
   mainImage: SanityImageSource;
-  body: TypedObject | TypedObject[];  // 替换 any
+  body: TypedObject | TypedObject[];
   publishedAt: string;
   author: { name: string };
 }
 
-interface PageProps {
+// 删除自定义的 PageProps 接口
+// interface PageProps {
+//   params: { slug: string }
+// }
+
+// 使用 Next.js 的类型定义
+export default async function BlogPost({
+  params,
+}: {
   params: { slug: string }
-}
-
-async function getPost(slug: string) {
-  const post = await client.fetch(`
-    *[_type == "post" && slug.current == $slug][0] {
-      title,
-      mainImage,
-      body,
-      publishedAt,
-      author->,
-      categories[]->
-    }
-  `, { slug })
-  return post
-}
-
-export default async function BlogPost({ params }: PageProps) {
+}) {
   const post: Post = await getPost(params.slug)
 
   return (
@@ -79,4 +71,18 @@ export default async function BlogPost({ params }: PageProps) {
       </div>
     </article>
   )
+}
+
+async function getPost(slug: string) {
+  const post = await client.fetch(`
+    *[_type == "post" && slug.current == $slug][0] {
+      title,
+      mainImage,
+      body,
+      publishedAt,
+      author->,
+      categories[]->
+    }
+  `, { slug })
+  return post
 }
