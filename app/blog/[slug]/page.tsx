@@ -6,9 +6,6 @@ import { PortableText } from '@portabletext/react'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { TypedObject } from '@portabletext/types'
 
-// 添加 Next.js 的类型导入
-import { Metadata } from 'next'
-
 interface Post {
   title: string;
   mainImage: SanityImageSource;
@@ -19,10 +16,9 @@ interface Post {
 
 type Props = {
   params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function BlogPost({ params, searchParams }: Props) {
+export default async function BlogPost({ params }: Props) {
   const post: Post = await getPost(params.slug)
   
   return (
