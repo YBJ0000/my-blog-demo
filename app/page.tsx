@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { format } from 'date-fns'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
+export const revalidate = 60  // 添加这行
+
 async function getPosts() {
   const posts = await client.fetch(`
     *[_type == "post"] | order(publishedAt desc) {

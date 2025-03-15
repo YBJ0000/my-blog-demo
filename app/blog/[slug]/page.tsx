@@ -26,6 +26,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return posts.map((post: { slug: string }) => ({ slug: post.slug }));
 }
 
+export const revalidate = 60  // 每60秒重新验证数据
+
 async function BlogPost(props: PageProps) {
   const params = await props.params;  // 直接等待 Promise
   const post: Post = await getPost(params.slug);
