@@ -15,7 +15,7 @@ interface Post {
 }
 
 interface PageProps {
-  params: { slug: string }; // ✅ 确保 params 是对象
+  params: Promise<{ slug: string }>;  // 修改为 Promise 类型
 }
 
 // ✅ 让 Next.js 预加载 slug，避免 params 被 Promise 误判
@@ -27,9 +27,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 }
 
 async function BlogPost(props: PageProps) {
-  const params = await Promise.resolve(props.params); // ✅ 确保 params 解析
+  const params = await props.params;  // 直接等待 Promise
   const post: Post = await getPost(params.slug);
-
 
   return (
     <article className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
