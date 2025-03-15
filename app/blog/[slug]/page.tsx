@@ -18,7 +18,7 @@ interface PageProps {
   params: { slug: string };
 }
 
-const BlogPost = async ({ params }: PageProps) => {
+async function BlogPost({ params }: PageProps) {
   const post: Post = await getPost(params.slug)
   
   return (
