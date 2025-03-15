@@ -3,6 +3,19 @@ import Image from 'next/image'
 import Link from 'next/link'  // 添加这行
 import { format } from 'date-fns'
 import { PortableText } from '@portabletext/react'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+
+interface Post {
+  title: string;
+  mainImage: SanityImageSource;
+  body: any;
+  publishedAt: string;
+  author: { name: string };
+}
+
+interface PageProps {
+  params: { slug: string }
+}
 
 async function getPost(slug: string) {
   const post = await client.fetch(`
@@ -18,8 +31,8 @@ async function getPost(slug: string) {
   return post
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug)
+export default async function BlogPost({ params }: PageProps) {
+  const post: Post = await getPost(params.slug)
 
   return (
     <article className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
