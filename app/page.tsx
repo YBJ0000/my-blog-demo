@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { client, urlFor } from '../lib/sanity'
 import Link from 'next/link'
 import { format } from 'date-fns'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 async function getPosts() {
   const posts = await client.fetch(`
@@ -41,7 +42,7 @@ export default async function Home() {
             </h1>
             <p className="text-lg leading-8 text-gray-600 max-w-2xl mx-auto mb-8">
               This is Bingjia Yang. I am currently studying at the University of New South Wales, 
-              pursuing a Master's degree in Information Technology and seeking a job in full-stack development. 
+              pursuing a Master&apos;s degree in Information Technology and seeking a job in full-stack development. 
               Passionate about developing useful applications.
             </p>
             <Link 
@@ -62,7 +63,7 @@ export default async function Home() {
             Recent Posts
           </h2>
           <div className="space-y-12">
-            {posts.map((post: any) => (
+            {posts.map((post: Post) => (
               <article key={post._id} className="group">
                 <Link href={`/blog/${post.slug.current}`}>
                   <div className="bg-white rounded-3xl shadow-lg overflow-hidden transition-all hover:shadow-xl">
@@ -97,4 +98,13 @@ export default async function Home() {
       </section>
     </main>
   )
+}
+
+interface Post {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  mainImage: SanityImageSource;
+  publishedAt: string;
+  author: { name: string };
 }
