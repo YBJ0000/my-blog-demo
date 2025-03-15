@@ -15,10 +15,11 @@ interface Post {
 }
 
 interface PageProps {
-  params: { slug: string };
+  params: { slug: string }; // ✅ 确保 params 是对象
 }
 
-export async function generateStaticParams() {
+// ✅ 让 Next.js 预加载 slug，避免 params 被 Promise 误判
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = await client.fetch(`
     *[_type == "post"] { "slug": slug.current }
   `);
@@ -26,7 +27,8 @@ export async function generateStaticParams() {
 }
 
 async function BlogPost({ params }: PageProps) {
-  const post: Post = await getPost(params.slug);
+  const resolvedParams = await Promise.resolve(params); // ✅ 强制解析 params，防止 TS 误判
+  const post: Post = await getPost(resolvedParams.slug);
 
   return (
     <article className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
