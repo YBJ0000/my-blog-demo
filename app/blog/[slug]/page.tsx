@@ -6,6 +6,9 @@ import { PortableText } from '@portabletext/react'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { TypedObject } from '@portabletext/types'
 
+// 添加 Next.js 的类型导入
+import { Metadata } from 'next'
+
 interface Post {
   title: string;
   mainImage: SanityImageSource;
@@ -14,19 +17,14 @@ interface Post {
   author: { name: string };
 }
 
-// 删除自定义的 PageProps 接口
-// interface PageProps {
-//   params: { slug: string }
-// }
-
-// 使用 Next.js 的类型定义
-export default async function BlogPost({
-  params,
-}: {
+type Props = {
   params: { slug: string }
-}) {
-  const post: Post = await getPost(params.slug)
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
+export default async function BlogPost({ params, searchParams }: Props) {
+  const post: Post = await getPost(params.slug)
+  
   return (
     <article className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
       <div className="max-w-4xl mx-auto px-4">
