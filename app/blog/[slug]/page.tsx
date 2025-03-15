@@ -14,11 +14,11 @@ interface Post {
   author: { name: string };
 }
 
-type Props = {
-  params: { slug: string }
+interface PageProps {
+  params: { slug: string };
 }
 
-export default async function BlogPost({ params }: Props) {
+const BlogPost = async ({ params }: PageProps) => {
   const post: Post = await getPost(params.slug)
   
   return (
@@ -80,3 +80,5 @@ async function getPost(slug: string) {
   `, { slug })
   return post
 }
+
+export default BlogPost
