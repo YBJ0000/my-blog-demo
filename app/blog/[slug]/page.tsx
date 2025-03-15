@@ -26,9 +26,10 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return posts.map((post: { slug: string }) => ({ slug: post.slug }));
 }
 
-async function BlogPost({ params }: PageProps) {
-  const resolvedParams = await Promise.resolve(params); // ✅ 强制解析 params，防止 TS 误判
-  const post: Post = await getPost(resolvedParams.slug);
+async function BlogPost(props: PageProps) {
+  const params = await Promise.resolve(props.params); // ✅ 确保 params 解析
+  const post: Post = await getPost(params.slug);
+
 
   return (
     <article className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
