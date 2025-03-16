@@ -39,28 +39,31 @@ export default async function Home() {
                 className="rounded-full mx-auto shadow-lg"
               />
             </div>
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-6 flex items-center justify-center gap-3">
-              <span className="group relative">
-                Developer
-                <span className="absolute right-0 top-0 w-0.5 h-full bg-gray-900 opacity-0 group-hover:opacity-100 animate-blink"></span>
-              </span>
-              <span>, </span>
-              <span className="group relative">
-                Designer
-                <span className="absolute -inset-1 border-2 border-gray-900 group-hover:border-dashed"></span>
-              </span>
-              <span>, </span>
-              <span className="group flex items-center gap-1">
-                <FaStar className="transition-transform group-hover:rotate-180" />
-                Dreamer
-              </span>
-              <span>, </span>
-              <span className="group flex items-center gap-1">
-                <FaUser className="transition-opacity opacity-50 group-hover:opacity-100" />
-                Doer
-              </span>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-6">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <span className="group relative">
+                  &lt;Developer/&gt;
+                  <span className="absolute right-0 top-0 w-0.5 h-full bg-gray-900 opacity-0 group-hover:opacity-100 animate-blink"></span>
+                </span>
+                <span>, </span>
+                <span className="group relative">
+                  Designer
+                  <span className="absolute -inset-1 border-2 border-gray-900 group-hover:border-dashed"></span>
+                </span>
+              </div>
+              <div className="flex items-center justify-center gap-3">
+                <span className="group flex items-center gap-1">
+                  <FaStar className="transition-transform group-hover:rotate-180" />
+                  Dreamer
+                </span>
+                <span>, </span>
+                <span className="group flex items-center gap-1">
+                  <FaUser className="transition-opacity opacity-50 group-hover:opacity-100" />
+                  Doer
+                </span>
+              </div>
             </h1>
-            <p className="text-lg leading-8 text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-lg leading-8 text-gray-600 max-w-2xl mx-auto mb-8 text-left">
               This is Bingjia Yang. I am currently studying at the University of New South Wales, 
               pursuing a Master&apos;s degree in Information Technology and seeking a job in full-stack development. 
               Passionate about developing useful applications.
