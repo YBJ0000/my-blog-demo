@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { client, urlFor } from '../lib/sanity'
 import Link from 'next/link'
 import { format } from 'date-fns'
+import { toZonedTime } from 'date-fns-tz'  // 修改这里
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { FaStar, FaUser } from 'react-icons/fa' // 添加图标
 
@@ -106,7 +107,10 @@ export default async function Home() {
                       </h3>
                       <div className="mt-4 flex items-center gap-x-4 text-sm text-gray-500">
                         <time dateTime={post.publishedAt}>
-                          {format(new Date(post.publishedAt), 'MMMM dd, yyyy')}
+                          {format(
+                            toZonedTime(new Date(post.publishedAt), 'Australia/Sydney'),  // 修改这里
+                            'MMMM dd, yyyy'
+                          )}
                         </time>
                         <span>·</span>
                         <span>By {post.author?.name}</span>

@@ -2,6 +2,7 @@ import { client, urlFor } from '../../../lib/sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import { format } from 'date-fns'
+import { toZonedTime } from 'date-fns-tz'  // 添加这个导入
 import { PortableText } from '@portabletext/react'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { TypedObject } from '@portabletext/types'
@@ -50,7 +51,10 @@ async function BlogPost(props: PageProps) {
                 {post.title}
               </h1>
               <div className="text-gray-500">
-                By {post.author?.name} · {format(new Date(post.publishedAt), 'MMMM dd, yyyy')}
+                By {post.author?.name} · {format(
+                  toZonedTime(new Date(post.publishedAt), 'Australia/Sydney'),
+                  'MMMM dd, yyyy'
+                )}
               </div>
             </header>
 
