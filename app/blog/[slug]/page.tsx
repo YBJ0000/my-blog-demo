@@ -2,7 +2,7 @@ import { client, urlFor } from '../../../lib/sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import { format } from 'date-fns'
-import { toZonedTime } from 'date-fns-tz'  // 添加这个导入
+import { formatInTimeZone } from 'date-fns-tz'  // 修改这个导入
 import { PortableText } from '@portabletext/react'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { TypedObject } from '@portabletext/types'
@@ -50,10 +50,12 @@ async function BlogPost(props: PageProps) {
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-4">
                 {post.title}
               </h1>
+              // 在组件中修改时间格式化部分
               <div className="text-gray-500">
-                By {post.author?.name} · {format(
-                  toZonedTime(new Date(post.publishedAt), 'Australia/Sydney'),
-                  'MMMM dd, yyyy HH:mm:ss (OOOO)'  // 修改这里，显示具体时间和时区
+                By {post.author?.name} · {formatInTimeZone(
+                  new Date(post.publishedAt),
+                  'Australia/Sydney',
+                  'MMMM dd, yyyy HH:mm:ss (OOOO)'
                 )}
               </div>
             </header>
