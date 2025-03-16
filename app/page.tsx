@@ -3,6 +3,7 @@ import { client, urlFor } from '../lib/sanity'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { FaStar, FaUser } from 'react-icons/fa' // 添加图标
 
 export const revalidate = 60  // 添加这行
 
@@ -26,7 +27,6 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
       <section className="pt-32 pb-24">
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-white rounded-3xl shadow-xl p-12 text-center">
@@ -39,8 +39,26 @@ export default async function Home() {
                 className="rounded-full mx-auto shadow-lg"
               />
             </div>
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-6">
-              Developer Designer Dreamer Doer
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-6 flex items-center justify-center gap-3">
+              <span className="group relative">
+                Developer
+                <span className="absolute right-0 top-0 w-0.5 h-full bg-gray-900 opacity-0 group-hover:opacity-100 animate-blink"></span>
+              </span>
+              <span>, </span>
+              <span className="group relative">
+                Designer
+                <span className="absolute -inset-1 border-2 border-gray-900 group-hover:border-dashed"></span>
+              </span>
+              <span>, </span>
+              <span className="group flex items-center gap-1">
+                <FaStar className="transition-transform group-hover:rotate-180" />
+                Dreamer
+              </span>
+              <span>, </span>
+              <span className="group flex items-center gap-1">
+                <FaUser className="transition-opacity opacity-50 group-hover:opacity-100" />
+                Doer
+              </span>
             </h1>
             <p className="text-lg leading-8 text-gray-600 max-w-2xl mx-auto mb-8">
               This is Bingjia Yang. I am currently studying at the University of New South Wales, 
