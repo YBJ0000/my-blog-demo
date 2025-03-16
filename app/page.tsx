@@ -108,8 +108,8 @@ export default async function Home() {
                       <div className="mt-4 flex items-center gap-x-4 text-sm text-gray-500">
                         <time dateTime={post.publishedAt}>
                           {format(
-                            toZonedTime(new Date(post.publishedAt), 'Australia/Sydney'),  // 修改这里
-                            'MMMM dd, yyyy'
+                            toZonedTime(new Date(post.publishedAt), 'Australia/Sydney'),
+                            'MMMM dd, yyyy HH:mm:ss (OOOO)'  // 修改这里，显示具体时间和时区
                           )}
                         </time>
                         <span>·</span>

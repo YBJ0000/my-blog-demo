@@ -53,7 +53,7 @@ async function BlogPost(props: PageProps) {
               <div className="text-gray-500">
                 By {post.author?.name} · {format(
                   toZonedTime(new Date(post.publishedAt), 'Australia/Sydney'),
-                  'MMMM dd, yyyy'
+                  'MMMM dd, yyyy HH:mm:ss (OOOO)'  // 修改这里，显示具体时间和时区
                 )}
               </div>
             </header>
